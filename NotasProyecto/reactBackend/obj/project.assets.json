@@ -4046,11 +4046,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\everc\\OneDrive\\Documentos\\progra2\\ReactIntroduccion\\NotasProyecto\\reactBackend\\reactBackend.csproj",
+      "projectUniqueName": "C:\\Users\\everc\\OneDrive\\Documentos\\Progrmacion\\ReactIntroduccion\\NotasProyecto\\reactBackend\\reactBackend.csproj",
       "projectName": "reactBackend",
-      "projectPath": "C:\\Users\\everc\\OneDrive\\Documentos\\progra2\\ReactIntroduccion\\NotasProyecto\\reactBackend\\reactBackend.csproj",
+      "projectPath": "C:\\Users\\everc\\OneDrive\\Documentos\\Progrmacion\\ReactIntroduccion\\NotasProyecto\\reactBackend\\reactBackend.csproj",
       "packagesPath": "C:\\Users\\everc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\everc\\OneDrive\\Documentos\\progra2\\ReactIntroduccion\\NotasProyecto\\reactBackend\\obj\\",
+      "outputPath": "C:\\Users\\everc\\OneDrive\\Documentos\\Progrmacion\\ReactIntroduccion\\NotasProyecto\\reactBackend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\everc\\AppData\\Roaming\\NuGet\\NuGet.Config",
