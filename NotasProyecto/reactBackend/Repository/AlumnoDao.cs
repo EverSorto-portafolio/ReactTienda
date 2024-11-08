@@ -20,7 +20,6 @@ namespace reactBackend.Repository
 
         public RegistroAlumnoContext contexto = new RegistroAlumnoContext();
         #endregion
-
         #region Select All
         /// <summary>
         /// Se utiliza para selecionar un elemento alumno de la base de datos.
@@ -35,8 +34,8 @@ namespace reactBackend.Repository
             return alumno;
         }
         #endregion
-
         #region Selecionamos por ID
+        
         /// <summary>
         /// Este metodo nos devolvera el objeto que contenga el primer ID que encuentre y coincida con el que se pase como paramtro Modelo ? inidca que aceptara nulos
         /// </summary>
@@ -46,8 +45,34 @@ namespace reactBackend.Repository
             var alumno = contexto.Alumnos.Where(x => x.Id == id).FirstOrDefault();
             return alumno == null ? null : alumno;
         }
-            
-
+        #endregion
+        #region Insertar
+        /// <summary>
+        /// Insertara un alumno a la base de datos inserInto Alumno
+        /// </summary>
+        /// <param name="alumno"> Es un objeto con las propiedades del modelo Alumno sin el ID</param>
+        /// <returns> Retorna un bool para verificar si la funcion se realizo correctamenteTrue si fallo False </returns>
+        public bool inserarAlumno(Alumno alumno) {
+            try 
+            {
+                var alum = new Alumno {
+                    Direccion = alumno.Direccion,
+                    Edad = alumno.Edad,
+                    Email = alumno.Email,
+                    Dni = alumno.Dni,
+                    Nombre = alumno.Nombre,
+                };               
+                // añadimos al contexto de (Dataset) que representa la base de datos 
+                // el metodo add
+                contexto.Alumnos.Add(alum);
+                // este elemento en si no nos guardara los datos para ello debemos utilizar el metodo Sabe
+                contexto.SaveChanges();
+              return true;
+            }catch(Exception e) {
+                Console.WriteLine(e.InnerException);
+                return false; }
+        }
         #endregion
     }
 }
+
