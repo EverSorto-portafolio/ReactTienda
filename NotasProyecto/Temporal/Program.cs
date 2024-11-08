@@ -27,7 +27,21 @@ var nuevoAlumno = new Alumno
     Email = "12344321@email",
     Nombre= "Ricardo JR Milos"
 };
+//var resultado = alumnoDao.inserarAlumno(nuevoAlumno);
+//Console.WriteLine(resultado);
+#endregion
 
-var resultado = alumnoDao.inserarAlumno(nuevoAlumno);
-Console.WriteLine(resultado);
+#region updateAlumno
+
+var nuevoAlumno2 = new Alumno
+{   
+    Direccion = "Chalatenango, Barrio el centro",
+    Dni = "1345",
+    Edad = 30,
+    Email = "5@email",
+    Nombre = "Wiliams"
+};
+
+var resultado2 = alumnoDao.update(2, nuevoAlumno2);
+Console.WriteLine(resultado2);
 #endregion

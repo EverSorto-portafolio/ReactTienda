@@ -73,6 +73,32 @@ namespace reactBackend.Repository
                 return false; }
         }
         #endregion
+        #region update alumno 
+
+        public bool update(int id, Alumno actualizar) {
+            try {
+                var alumnoUpdate = GetById(id);
+
+                if (alumnoUpdate == null) {
+                    Console.WriteLine("Alumno es null");
+                    return false;
+                }
+                
+                alumnoUpdate.Direccion = actualizar.Direccion;
+                alumnoUpdate.Dni = actualizar.Dni;
+                alumnoUpdate.Nombre = actualizar.Nombre;
+                alumnoUpdate.Email = actualizar.Email;
+
+                contexto.Alumnos.Update(alumnoUpdate);
+                contexto.SaveChanges();
+                return true;
+
+
+            }catch(Exception e) { Console.WriteLine(e.InnerException);
+                return false;
+            }
+          #endregion
+        }
     }
 }
 
