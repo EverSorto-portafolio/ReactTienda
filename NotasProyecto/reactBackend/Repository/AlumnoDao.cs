@@ -1,4 +1,5 @@
-﻿using reactBackend.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using reactBackend.Context;
 using reactBackend.Models;
 using System;
 using System.Collections.Generic;
@@ -74,7 +75,16 @@ namespace reactBackend.Repository
         }
         #endregion
         #region update alumno 
-
+        /// <summary>
+        /// Se utiliza un int para llamar al metod getById
+        /// este nos devolvera un objeto Alumno
+        /// se cambia las propiedades por el objeto Alumno que se recive com parametro
+        /// se filtra que no sea null
+        /// si funcina devuelve true de lo contrario false
+        /// </summary>
+        /// <param name="id"> id del objetio a busca</param>
+        /// <param name="actualizar"> Objeto de tipo Alumno con el cual se sustituira lainformacion en la base de datos</param>
+        /// <returns> Si es correcto el update True de lo contrario un false</returns>
         public bool update(int id, Alumno actualizar) {
             try {
                 var alumnoUpdate = GetById(id);
@@ -97,8 +107,34 @@ namespace reactBackend.Repository
             }catch(Exception e) { Console.WriteLine(e.InnerException);
                 return false;
             }
-          #endregion
         }
+        #endregion
+        #region Delete
+        /// <summary>
+        /// Acepta el ID de un objeto, este ID lo pasa a un parametro de la funcion borrar
+        /// </summary>
+        /// <param name="id"> identificador del objeto sin FK a borrar</param>
+        /// <returns> True si es correcto el proceso, False si fue erroneo</returns>
+        public bool deleteAlumno(int id) { 
+            var borrar = GetById(id);
+            try
+            {
+                if (borrar == null)
+                {
+                    return false;
+                }
+                else {
+                    contexto.Alumnos.Remove(borrar);
+                    contexto.SaveChanges();
+                    return true;
+                }
+                
+            } catch (Exception e) { 
+                Console.WriteLine(e.InnerException);
+                return false;
+            }
+        }
+        #endregion
     }
 }
 

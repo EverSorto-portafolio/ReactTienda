@@ -8,7 +8,7 @@ AlumnoDao alumnoDao =  new AlumnoDao();
 var alumno = alumnoDao.SelectAll();
 // Recorremos la lista 
 foreach (var item in alumno) { 
-    Console.WriteLine(item.Nombre);
+    Console.WriteLine(item.Id + " " +  item.Nombre);
 }
 #endregion
 Console.WriteLine(" ");
@@ -42,6 +42,11 @@ var nuevoAlumno2 = new Alumno
     Nombre = "Wiliams"
 };
 
-var resultado2 = alumnoDao.update(2, nuevoAlumno2);
-Console.WriteLine(resultado2);
+//var resultado2 = alumnoDao.update(2, nuevoAlumno2);
+//Console.WriteLine(resultado2);
+#endregion
+
+#region borrar
+  var result =  alumnoDao.deleteAlumno(1007);
+Console.WriteLine( "Se elimino " +result);
 #endregion
