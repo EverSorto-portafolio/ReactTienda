@@ -31,7 +31,8 @@ namespace reactBackend.Repository
             // creamos una fucnion flecha (x)=>{}
             // where define una condicon logica de comparacion 
             // p es un objeto temporal que represnta al modelo profesor
-            //FirstOrDefault() llama al primaro que cumpla con la condicon de lo contrario de null 
+            //FirstOrDefault()
+            //llama al primaro que cumpla con la condicon de lo contrario de null 
             var prof = context.Profesors.Where(
                 p => p.Usuario == usuario 
                 && p.Pass==pass).FirstOrDefault();
