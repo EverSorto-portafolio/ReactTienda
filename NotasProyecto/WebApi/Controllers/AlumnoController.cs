@@ -18,10 +18,19 @@ namespace WebApi.Controllers
         #region endPonitAlumnoProfesor
         //nombre al cual debe acceder la ruta del endpoint
         [HttpGet("alumnoProfesor")]
-        public List<AlumnoProfesor> GetAlumnoProfesor(string usuario) { 
+        public List<AlumnoProfesor> GetAlumnoProfesor(string usuario) {
             return _dao.alumnoProfesors(usuario);
         }
 
         #endregion
+
+        #region SelectByID
+        [HttpGet("alumno")]
+        public Alumno seletById(int id) { 
+            var alumno = _dao.GetById(id);
+            return alumno;
+        }
+        #endregion
+
     }
 }
