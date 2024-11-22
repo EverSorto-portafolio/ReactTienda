@@ -23,7 +23,6 @@ namespace WebApi.Controllers
         }
 
         #endregion
-
         #region SelectByID
         [HttpGet("alumno")]
         public Alumno seletById(int id) { 
@@ -31,6 +30,20 @@ namespace WebApi.Controllers
             return alumno;
         }
         #endregion
+        #region ActualizarDatos
+        // el metodo para actualizar es put
+        [HttpPut("alumno")]
+        // puede tener el mismo nombre que el endpoint anterior ya que es un metodo diferente el que se esta utilizando 
+        
+        public bool actualizarAlumno([FromBody] Alumno alumno) {
+            // [FromBody] indica que se obtendra desde el navagador el objeto
+            // Alumno es el objeto 
+            //alumno es el nombre de la instancia de ese objeto
 
+            return _dao.update(alumno.Id, alumno);
+        
+        }
+
+        #endregion
     }
 }
