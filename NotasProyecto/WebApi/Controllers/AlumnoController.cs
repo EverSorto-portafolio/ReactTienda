@@ -45,7 +45,6 @@ namespace WebApi.Controllers
         }
 
         #endregion
-
         #region AlumnoMatricula
         // Cuando queremos crear un nuevo registro se debe de utilizar un metodo Post
         // Lo llamaremos alumno  aunque se llame igual la direccion se sobre escribe el metodo http.
@@ -53,7 +52,18 @@ namespace WebApi.Controllers
         //Para insertar el amumno vamos a necesitar todos los datos del alumno. Lo spbtendremos el body [FromBody] Objeto nombre_objeto
         public bool insertarMatricula([FromBody] Alumno alumno, int  idAsignatura) {
             return _dao.InsertarMatricula(alumno, idAsignatura);
-        } 
+        }
+        #endregion
+
+        #region deleteAlumno
+
+        // Crearemos el enunciado del metodo http
+        [HttpDelete("alumno")]
+        // se `puede utilizar la sobrecarga con la url al ser diferente metodo http
+
+        public bool eliminarAlumno(int id) {
+          return  _dao.eliminarAlumno(id);   
+        }
         #endregion
     }
 }
