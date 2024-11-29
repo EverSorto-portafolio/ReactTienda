@@ -15,8 +15,15 @@ namespace WebApi.Controllers
         #region Lista_de_calificaciones
         [HttpGet("calificaciones")]
         public List<Calificacion> get(int idMatricula) { 
-        
            return _cdao.seleccion(idMatricula);
+        }
+        #endregion
+
+        #region ingresarDatos
+        //El metodo al ingresar datos sera post
+        [HttpPost("calificacion")]
+        public bool insertar([FromBody] Calificacion calificacion) {
+        return _cdao.insertar(calificacion);
         }
         #endregion
     }

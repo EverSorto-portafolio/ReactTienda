@@ -21,7 +21,7 @@ namespace reactBackend.Repository
                 if (matricula != null)
                 {
 
-                    var calificacion = _contexto.Calificacions.Where(x => x.Id == matriculaid);
+                    var calificacion = _contexto.Calificacions.Where(x => x.Id == matriculaid).ToList();
                     return calificacion;
                 }
                 else {
@@ -36,6 +36,27 @@ namespace reactBackend.Repository
             }
             
         
+        }
+        #endregion
+
+        #region insertarDatos
+        public bool insertar(Calificacion calificacion) {
+
+            try
+            {
+                if (calificacion == null)
+                {
+                    return false;
+                }
+                var addCalificacion = _contexto.Calificacions.Add(calificacion);
+                _contexto.SaveChanges();
+                Console.WriteLine("Guardado");
+                return true;
+
+            }
+            catch (Exception ex) {
+                return false;            
+            }
         }
         #endregion
     }
