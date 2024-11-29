@@ -251,7 +251,6 @@ namespace reactBackend.Repository
             }
         }
         #endregion
-
         #region DeleteAlumno
         /// <summary>
         /// int id del alumno a borrar
