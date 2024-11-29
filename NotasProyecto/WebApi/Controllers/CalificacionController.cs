@@ -13,7 +13,7 @@ namespace WebApi.Controllers
         private CalificacionDao _cdao = new CalificacionDao();
 
         #region Lista_de_calificaciones
-        [HttpGet("calificaciones")]
+        [HttpGet("calificacion")]
         public List<Calificacion> get(int idMatricula) { 
            return _cdao.seleccion(idMatricula);
         }
@@ -24,6 +24,16 @@ namespace WebApi.Controllers
         [HttpPost("calificacion")]
         public bool insertar([FromBody] Calificacion calificacion) {
         return _cdao.insertar(calificacion);
+        }
+        #endregion
+
+        #region EliminarCalificaciones
+        [HttpDelete("Calificacion")]
+
+        public bool delete(int idCalificacion) {
+
+            return _cdao.eliminarCalificaicon(idCalificacion);
+        
         }
         #endregion
     }
