@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import * as API from "./services/data"
-
+import imagen  from  "./assets/login.png"
 
 export function App() {
   const [teacher, setTeacher] = useState({
@@ -20,7 +20,9 @@ export function App() {
       }
   return (
     <>
+      <img src={imagen}/>
       <h1>Formulario</h1>
+      
       <form id='formulario' onSubmit={handleSubmit}>
       <br></br>
         Usuario  <input type='text' id='usuario' onChange={
