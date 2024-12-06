@@ -7,14 +7,12 @@ builder.Services.AddControllers();
 
 builder.Services.AddCors(
     opciones => opciones.AddPolicy("ReactApp",
-    builder => builder.WithOrigins("http://localhost:5173/")
+    builder => builder.WithOrigins("http://localhost:5173")
     .AllowAnyMethod()
     .AllowAnyHeader()
     .AllowCredentials()
     )
     );
-
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //builder.Services.AddCors(policyBuilder => policyBuilder.AddDefaultPolicy(
