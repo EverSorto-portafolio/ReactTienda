@@ -3,7 +3,7 @@ import { DashBoard } from "./Dashboard";
 export function StudentNew(){
     return(
         <>
-        <DashBoard/>
+        <Headers/>
         <p>Ingresar nuevo alumno</p>
         </>
     )

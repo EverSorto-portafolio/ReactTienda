@@ -36,6 +36,7 @@ namespace reactBackend.Repository
             var prof = context.Profesors.Where(
                 p => p.Usuario == usuario 
                 && p.Pass==pass).FirstOrDefault();
+ 
             //retornamos el resultado de la consulta Lamda
             return prof;
         }

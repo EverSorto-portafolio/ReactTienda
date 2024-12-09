@@ -7,8 +7,6 @@ export function DashBoard() {
         <>
            <Header/>
            <StudenList/>
-
-          
         </>
     )
 }
