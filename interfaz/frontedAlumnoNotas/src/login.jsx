@@ -9,7 +9,9 @@ export function Login() {
     const [teacher, setTeacher] = useState({
         usuario: "", pass: ""
     });
+    
     const navigate = useNavigate();
+
     async function handleSubmit(e) {
         e.preventDefault();
 

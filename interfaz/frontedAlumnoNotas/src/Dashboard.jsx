@@ -1,7 +1,15 @@
+
+import { Header } from "./Headers"
+import { StudenList } from "./StudentList"
+
 export function DashBoard() {
     return (
         <>
-            <h1>Hola desde el panel de control</h1>
+           <Header/>
+           <StudenList/>
+
+          
         </>
     )
 }
+// 
