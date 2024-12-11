@@ -13,3 +13,14 @@ export function login(usuarioBody, passBody) {
     }).then(data => data.text())
 
 }
+
+export function getStudent(usuario){
+    return fetch(URL + 'alumnoProfesor?usuario=' + usuario,
+    {
+        method: "GET",
+        headers:
+        {
+            'Content-Type':"application/json"
+        }
+    }).then(data =>data.json())
+}

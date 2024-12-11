@@ -21,6 +21,7 @@ export function Login() {
             alert("Usuario no encontrado");
         }
         if (response.length != 0 && response != "Elemeno no encontrado") {
+            sessionStorage.setItem("usuario", response);   
             navigate("/dashboard")
             console.log("Bienvenido nuevamente  = " + response);
         }
