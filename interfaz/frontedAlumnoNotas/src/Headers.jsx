@@ -6,7 +6,6 @@ export function Header(){
         <>
         <Link to= {"/dashboard" } > <span> Listado</span></Link> 
         <Link to= {"/student" } > <span> Nuevo</span></Link>
-        
         <span>Cerrar Sesion</span>
         </>
     )
