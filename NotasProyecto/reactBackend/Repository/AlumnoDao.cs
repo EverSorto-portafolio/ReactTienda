@@ -184,45 +184,46 @@ namespace reactBackend.Repository
         /// </summary>
         /// <param name="alumno"> es de tipo Alumno </param>
         /// <returns> Alumno </returns>
-        public Alumno DNIAlumno(Alumno alumno) {
+        public Alumno? DNIAlumno(Alumno alumno) {
             var alumnos = contexto.Alumnos.Where(x => x.Dni == alumno.Dni).FirstOrDefault();
+            Console.WriteLine(alumno.Dni);
             return alumnos == null ? null : alumnos;
         }
         #endregion
         #region AlumnoMatricula
         public bool InsertarMatricula( Alumno alumno, int idAsing){
-            // se utiliza  un bloque con el cual  detectaremos las exepciones que nos pueda dar la inserccion 
-            try { 
-                
-                //comprobar si existe el DNI en los alumnos
-                var alumnoDNI = DNIAlumno(alumno);
-                //si existe solo lo añadimos pero si no lo debemos de insertar
-                if (alumnoDNI == null)
-                {
+            try
+            {
+                var alumnoDNI = contexto.Alumnos.Where(a => a.Dni == alumno.Dni).FirstOrDefault();
+                if (alumnoDNI != null) {
+                    Console.WriteLine("alumno ID " + alumnoDNI.Id);
+                    Console.WriteLine("Asignatura ID" + idAsing);
+                     matriculaAsignaturaALumno(alumnoDNI, idAsing);
+                    return true;
+                }
+                if (alumnoDNI == null ) {
+                    Console.WriteLine("Alumno no registrado Añadiendo alumno");
                     inserarAlumno(alumno);
-                    // si en null creamos el alumno pero ahora debemos de matricular el alumno con el Dni que corresponda
-                    var alumnoInsertado = DNIAlumno(alumno);
-                    // ahora debemos crear un objeto matricula para poder hacer la insercion de ambas llaves
-                    var unirAlumnoMatricula = matriculaAsignaturaALumno(alumno, idAsing);
-                    if (unirAlumnoMatricula == false)
-                    {
-                        return false;
+                    Console.WriteLine("Se añadio al estudiante Correctamente");
+                    var buscandoAlumno = DNIAlumno(alumno);
+                    Console.WriteLine("Buscando Id alumno ingresado" + buscandoAlumno.Id);
+                    if (buscandoAlumno.Id != null){
+                        matriculaAsignaturaALumno(buscandoAlumno, idAsing);
+                        Console.WriteLine("Alumno Matricula registrado");
+                        return true;
                     }
-
-                    return true;
+                    return InsertarMatricula(alumnoDNI, idAsing);
                 }
-                else {
-                    matriculaAsignaturaALumno(alumnoDNI, idAsing);
-                    return true;
-                }
-
-
-            }catch (Exception ex) {
-            Console.WriteLine(ex.Message);
-             
-
                 return false;
             }
+            catch (Exception e) {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+         
+            
+         
+          
         }
         #endregion
         #region Matriucla
@@ -242,8 +243,11 @@ namespace reactBackend.Repository
                 matricula.AlumnoId = alumno.Id;
                 matricula.AsignaturaId = idAsignatura;
                 // Guardamos el cambio que se realizo al momento de insertar.
+                Console.WriteLine(matricula.AlumnoId);
+                Console.WriteLine(matricula.AsignaturaId);
                 contexto.Matriculas.Add(matricula);
                 contexto.SaveChanges();
+                Console.WriteLine(" Guardando cambios del contexto");
                 return true;
             } catch (Exception ex) { 
                 Console.WriteLine(ex.Message);   
@@ -295,3 +299,49 @@ namespace reactBackend.Repository
     }
 }
 
+/*
+ * 
+ *   Console.WriteLine("inicio el proceso de matricula" );
+            try { 
+                
+                //comprobar si existe el DNI en los alumnos
+                var alumnoDNI = DNIAlumno(alumno);
+                //si existe solo lo añadimos pero si no lo debemos de insertar
+                if (alumnoDNI == null)
+                {
+                    Console.WriteLine("Alumno a matrucular " + alumno.Nombre);
+                    Console.WriteLine("Insertando alumno nuevo ");
+                    inserarAlumno(alumno);
+                    Console.WriteLine("Insertan con exito  ");
+                    // si en null creamos el alumno pero ahora debemos de matricular el alumno con el Dni que corresponda
+                    //var alumnoInsertado = DNIAlumno(alumno);
+                    // ahora debemos crear un objeto matricula para poder hacer la insercion de ambas llaves
+                    var unirAlumnoMatricula = matriculaAsignaturaALumno(alumno, idAsing);
+                    Console.WriteLine(unirAlumnoMatricula);
+
+                    if (unirAlumnoMatricula == false)
+                    {
+                        Console.WriteLine("matricula = falsa ");
+                        return false;
+                    }
+
+                    return true;
+                }
+                else {
+                    matriculaAsignaturaALumno(alumnoDNI, idAsing);
+                    Console.WriteLine("Alumno existe");
+                    return true;
+                }
+
+
+            }catch (Exception ex) {
+            Console.WriteLine(ex.Message);
+             
+
+                return false;
+            }
+ * 
+ * 
+ * 
+ * 
+ */

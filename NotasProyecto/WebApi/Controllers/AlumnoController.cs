@@ -64,5 +64,12 @@ namespace WebApi.Controllers
           return  _dao.eliminarAlumno(id);   
         }
         #endregion
+
+        #region
+        [HttpGet("todos")]
+        public List<Alumno> todos() {
+            return _dao.SelectAll();
+        }
+        #endregion
     }
 }

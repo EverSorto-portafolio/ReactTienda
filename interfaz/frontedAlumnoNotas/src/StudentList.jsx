@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react";
-import { DashBoard } from "./Dashboard";
 import * as API from "./services/data"
 
 export function StudenList() {
 
     let usuario = sessionStorage.getItem("usuario")
-    
+
     const [students, setStudents] = useState([])
-console.log("lista de estudiantes para el profesor " + usuario)
-   
+    console.log("lista de estudiantes para el profesor " + usuario)
     useEffect(() => {
-        API.getStudent(usuario).then(setStudents)
-    })
-    console.log(students.id)
-    return (
+        if(usuario){
+        API.getStudent(usuario).then(data =>{
+            console.log("Datos recibidos", data);
+            setStudents(data)
+        })
+        }
+       
+    }, [usuario])
+
+     return (
         <>
             <table>
                 <thead>
@@ -32,25 +36,26 @@ console.log("lista de estudiantes para el profesor " + usuario)
                 </thead>
                 <tbody>
                     {
-                        students?.
-                        map(students => 
-                        ( <tr key={students.id}>
-                            <td> {students.id}</td>
-                            <td> {students.dni}</td>
-                            <td> {students.nombre}</td>
-                            <td> {students.direccion}</td>
-                            <td> {students.edad}</td>
-                            <td> {students.email}</td>
-                            <td> {students.asignatura}</td>
-                            <td> Editar</td>
-                            <td> Calificar</td>
-                            <td> eliminar </td>
+                        students?.map(student => (
+                            <tr key={student.id}>
+                             <td>{student.id}</td>
+                             <td>{student.dni}</td>
+                             <td>{student.nombre}</td>   
+                             <td>{student.direccion}</td>
+                             <td>{student.edad}</td>
+                             <td>{student.email}</td>
+                             <td>{student.asignatura}</td>
+                             <td>Editar</td>
+                             <td>Calificar</td>
+                             <td>Eliminar</td>
                             </tr>
-                        )              
-                     )
+                            )
+                        )
                     }
                 </tbody>
             </table>
         </>
     )
 }
+
+//<td onClick={() => deleteStudent(students.id)}> eliminar </td>

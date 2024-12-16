@@ -17,7 +17,6 @@ export function login(usuarioBody, passBody) {
 export function getStudent(usuario){
     return fetch(URL + 'alumnoProfesor?usuario=' + usuario,
     {
-        method: "GET",
         headers:
         {
             'Content-Type':"application/json"
@@ -34,9 +33,9 @@ export function createStudent(student){
         edad:student.edad,
         email:student.email, 
         idAsignatura:student.idAsignatura
-    }
-    
-    return fetch(URL+"alumno?idAsignatura" + student.idAsignatura, {
+    } 
+    console.log("Id" + data.idAsignatura);
+    return fetch(URL+"alumno?idAsignatura=" + data.idAsignatura, {
         
         method:"POST",
         body: JSON.stringify(data),
@@ -45,4 +44,13 @@ export function createStudent(student){
         }
     }).then(data => data.text())
 
+}
+
+export function deleteStudent(id){
+    return fetch( URL + "alumno?=id" + id, {
+        method:'DELETE',
+        headers:{
+            "Content-Type": 'application/json'
+        }
+    } ).then( data => data.text())
 }
