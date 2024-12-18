@@ -1,5 +1,7 @@
-const URL = 'https://localhost:7277/api/';
+import { data } from "react-router";
 
+const URL = 'https://localhost:7277/api/';
+//#region Login
 export function login(usuarioBody, passBody) {
     let datos = {
         usuario: usuarioBody, pass: passBody
@@ -13,7 +15,8 @@ export function login(usuarioBody, passBody) {
     }).then(data => data.text())
 
 }
-
+//#endregion
+//#region getStudent
 export function getStudent(usuario){
     return fetch(URL + 'alumnoProfesor?usuario=' + usuario,
     {
@@ -23,8 +26,8 @@ export function getStudent(usuario){
         }
     }).then(data =>data.json())
 }
-
-
+//#endregion
+//#region createStudent
 export function createStudent(student){
     let data = {
         dni:student.dni,
@@ -45,7 +48,8 @@ export function createStudent(student){
     }).then(data => data.text())
 
 }
-
+//#endregion
+//#region  deleteStudent
 export function deleteStudent(id){
     return fetch( URL + "alumno?id=" + id, {
         method:'DELETE',
@@ -54,3 +58,31 @@ export function deleteStudent(id){
         }
     } ).then( data => data.text())
 }
+//#endregion
+//#region editStudent
+    export function studentEdit(id){
+        return fetch(URL+"alumno?id=" + id, {
+            headers:{
+                "Content-Type": "application/json"
+            }
+        }).then(data => data.json());
+    }
+//#endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

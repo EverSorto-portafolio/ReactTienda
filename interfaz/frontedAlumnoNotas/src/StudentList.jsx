@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import * as API from "./services/data"
+import { Link } from "react-router";
 
 export function StudenList() {
 
@@ -59,7 +60,7 @@ export function StudenList() {
                              <td>{student.edad}</td>
                              <td>{student.email}</td>
                              <td>{student.asignatura}</td>
-                             <td>Editar</td>
+                             <td> <Link to={'/student/'+student.id}>Editar</Link>  </td>
                              <td>Calificar</td>
                              <td onClick={()=>deleteStudent(student.id)}>Eliminar</td>
                             </tr>
