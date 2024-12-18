@@ -47,7 +47,7 @@ export function createStudent(student){
 }
 
 export function deleteStudent(id){
-    return fetch( URL + "alumno?=id" + id, {
+    return fetch( URL + "alumno?id=" + id, {
         method:'DELETE',
         headers:{
             "Content-Type": 'application/json'

@@ -17,6 +17,20 @@ export function StudenList() {
        
     }, [usuario])
 
+        function deleteStudent(id){
+            console.log("Resultado = "+id);
+            API.deleteStudent(id).then(
+                resultado =>{
+                    if(resultado == "true"){
+                        alert("estudiante eliminado")
+                    }else{
+                        alert("Error");
+                    }
+                }
+            )
+            
+        }
+
      return (
         <>
             <table>
@@ -47,7 +61,7 @@ export function StudenList() {
                              <td>{student.asignatura}</td>
                              <td>Editar</td>
                              <td>Calificar</td>
-                             <td>Eliminar</td>
+                             <td onClick={()=>deleteStudent(student.id)}>Eliminar</td>
                             </tr>
                             )
                         )
