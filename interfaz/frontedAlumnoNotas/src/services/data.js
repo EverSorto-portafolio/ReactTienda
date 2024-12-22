@@ -68,7 +68,22 @@ export function deleteStudent(id){
         }).then(data => data.json());
     }
 //#endregion
+//#region
+export function getEditStudent(alumno){
+    
 
+    return fetch(URL + "alumno", {
+        method: "PUT",
+        body: JSON.stringify(alumno),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(data => data.text())
+
+    
+     
+}
+// #endregion
 
 
 
