@@ -11,7 +11,7 @@ namespace reactBackend.Models
         public int Id { get; set; }
 
         public string Dni { get; set; } = null!;
-
+        
         public string Nombre { get; set; } = null!;
 
         public string Direccion { get; set; } = null!;
@@ -21,5 +21,6 @@ namespace reactBackend.Models
         public string Email { get; set; } = null!;
 
         public string asignatura { get; set;}
+        public int matriculaId {  get; set; }
     }
 }

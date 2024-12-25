@@ -172,7 +172,8 @@ namespace reactBackend.Repository
                                     Direccion = a.Direccion,
                                     Edad = a.Edad,
                                     Email = a.Email,
-                                    asignatura = asig.Nombre
+                                    asignatura = asig.Nombre,
+                                    matriculaId = m.Id
                                 };
             
             return listadoALumno.ToList();

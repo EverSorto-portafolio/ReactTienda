@@ -3,11 +3,16 @@ import * as API from "./services/data"
 import { Link } from "react-router";
 
 export function StudenList() {
-
+   
+    
     let usuario = sessionStorage.getItem("usuario")
-
+    console.log();
     const [students, setStudents] = useState([])
     console.log("lista de estudiantes para el profesor " + usuario)
+
+   
+
+
     useEffect(() => {
         if(usuario){
         API.getStudent(usuario).then(data =>{
@@ -61,7 +66,7 @@ export function StudenList() {
                              <td>{student.email}</td>
                              <td>{student.asignatura}</td>
                              <td> <Link to={'/student/'+student.id}>Editar</Link>  </td>
-                             <td>Calificar</td>
+                             <td> <Link to={"/student/calificacion/" + student.matriculaId}>Calificar</Link></td>
                              <td onClick={()=>deleteStudent(student.id)}>Eliminar</td>
                             </tr>
                             )
