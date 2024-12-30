@@ -85,6 +85,15 @@ export function getEditStudent(alumno){
 }
 // #endregion
 
+//#region getNotas
+export function getNotas(id){
+    return fetch(URL + "calificacion?idMatricula=" + id, {
+        headers:{
+            "Content-Type": "application/json"
+        }
+    }).then(data => data.json())
+}
+//#endregion
 
 
 

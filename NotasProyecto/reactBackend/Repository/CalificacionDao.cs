@@ -15,14 +15,15 @@ namespace reactBackend.Repository
         #region Seleccionar_lista_caificaciones 
         public List<Calificacion> seleccion(int matriculaid) {
 
-            var matricula = _contexto.Matriculas.Where(x => x.Id == matriculaid);
-            Console.WriteLine("matricula encontrada");
+           // var matricula = _contexto.Matriculas.Where(x => x.Id == matriculaid).FirstOrDefault();
+               
             try {
-                if (matricula != null)
+                var idCalificaion = _contexto.Calificacions.Where(c => c.MatriculaId == matriculaid).FirstOrDefault();
+                Console.WriteLine("matricula encontrada" + idCalificaion?.Id);
+                if (idCalificaion.Id != null)
                 {
-
-                    var calificacion = _contexto.Calificacions.Where(x => x.Id == matriculaid).ToList();
-                    return calificacion;
+                   var calificacion = _contexto.Calificacions.Where(x => x.Id == idCalificaion.Id).ToList();
+                   return calificacion;
                 }
                 else {
 
