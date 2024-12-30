@@ -17,22 +17,21 @@ namespace reactBackend.Repository
 
            // var matricula = _contexto.Matriculas.Where(x => x.Id == matriculaid).FirstOrDefault();
                
-            try {
-                var idCalificaion = _contexto.Calificacions.Where(c => c.MatriculaId == matriculaid).FirstOrDefault();
-                Console.WriteLine("matricula encontrada" + idCalificaion?.Id);
-                if (idCalificaion.Id != null)
-                {
-                   var calificacion = _contexto.Calificacions.Where(x => x.Id == idCalificaion.Id).ToList();
-                   return calificacion;
-                }
-                else {
-
+            try 
+            {
+                var lista = _contexto.Calificacions.Where(x => x.MatriculaId == matriculaid).ToList();
+                if (lista == null && lista.Count ==0) {
+                    Console.WriteLine("No se encontraron calificaciones para la matrícula con ID: " + matriculaid);
                     return null;
                 }
-                
-            }catch(Exception ex) { 
+
+                Console.WriteLine("Calificaciones encontradas para la matrícula con ID: " + matriculaid);
+
+                return lista;
+            }
+            catch(Exception ex) { 
             
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("Error" + ex.Message);
                 return null;
             }
             

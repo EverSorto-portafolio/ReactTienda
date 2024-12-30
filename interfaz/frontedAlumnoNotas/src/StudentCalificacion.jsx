@@ -6,27 +6,58 @@ export function StudentCalificacion() {
 
     let params = useParams();
     const [calificaciones, setCalificaciones] = useState([]);
+    const [notas, setNotas] = useState([]);
 
     useEffect(() => {
         API.getNotas(params.matriculaId).then(data => setCalificaciones(data));
     }, []);
 
+    function enviarNotas() {
+        let NDescripcion = document.getElementById("Descripcion");
+        let NNota = document.getElementById("nota");
+        let NPorcentaje = document.getElementById("porcentaje");
+        let NmatriculaId = params.matriculaId;
+        let validar = NDescripcion.value.trim() !== "" && NNota.value.trim() !== "" && NPorcentaje.value.trim() !== "";
 
+        if (validar) {
+            let nuevaCalificacion = {
+                descripcion: NDescripcion.value,
+                nota: NNota.value,
+                porcentaje: NPorcentaje.value,
+                matriculaId: NmatriculaId
+            }
+            
+            API.crearNotas(nuevaCalificacion).then(data => {
+
+                if (data =="true") {
+                    alert("Se añadio la calificacion con exito");
+                    descripcion: NDescripcion.value = "";
+                    nota: NNota.value = "";
+                    porcentaje: NPorcentaje.value = "";
+                } else {
+                    alert("Error al añadir la calificacion");
+                }
+            });
+        }
+    }
     //#region return
     return (
         <>
-        <Header/>
+            <Header />
             <table>
                 <thead>
-                    <th>Descripcion</th>
-                    <th>Nota</th>
-                    <th>Porcentage</th>
-                    <th> </th>
+                    <tr>
+                        <th>Descripcion</th>
+                        <th>Nota</th>
+                        <th>Porcentage</th>
+                        <th> </th>
+                    </tr>
+
                 </thead>
                 <tbody>
                     {
-                        calificaciones.map(calificacion =>(
-                            <tr>
+                        calificaciones.map(calificacion => (
+                            <tr key = {calificacion.id}>
                                 <td>{calificacion.descripcion}</td>
                                 <td>{calificacion.nota}</td>
                                 <td>{calificacion.porcentaje} %</td>
@@ -35,7 +66,20 @@ export function StudentCalificacion() {
                         ))
 
                     }
-
+                    <tr>
+                        <td ><input type="text" id="Descripcion" placeholder="Descripcion"
+                            onChange={event => setNotas({ ...notas, descripcion: event.target.value })}
+                        /></td>
+                        <td ><input type="number" id="nota" placeholder="nota"
+                            onChange={event => setNotas({ ...notas, nota: parseInt(event.target.value) })}
+                        /></td>
+                        <td ><input type="text" id="porcentaje" placeholder="porcentaje"
+                            onChange={event => setNotas({ ...notas, porcentaje: event.target.value })}
+                        /></td>
+                        <td><button id="nuevo"
+                            onClick={() => enviarNotas()}
+                        >Crear Calificacion</button></td>
+                    </tr>
                 </tbody>
             </table>
         </>

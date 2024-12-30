@@ -84,7 +84,6 @@ export function getEditStudent(alumno){
      
 }
 // #endregion
-
 //#region getNotas
 export function getNotas(id){
     return fetch(URL + "calificacion?idMatricula=" + id, {
@@ -94,7 +93,23 @@ export function getNotas(id){
     }).then(data => data.json())
 }
 //#endregion
-
+//#region createNotas
+export function crearNotas(calificacion){
+    let data = {
+        descripcion: calificacion.descripcion,
+        nota: calificacion.nota,
+        porcentaje: calificacion.porcentaje,
+        matriculaid: calificacion.matriculaId
+    }
+    return fetch(URL + "calificacion", {
+        method: "POST",
+        body:JSON.stringify(data),
+        headers:{
+            "Content-Type": "application/json"
+        }   
+    }).then(response => response.text())
+}
+//#endregion
 
 
 
