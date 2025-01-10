@@ -111,6 +111,14 @@ export function crearNotas(calificacion){
 }
 //#endregion
 
+export function deleteNotas(id){
+    return fetch(URL + "Calificacion?idCalificacion=" + id, {
+        method: "DELETE",
+        headers:{
+            "Content-Type": "application/json"
+        }
+    }).then(data => data.text())
+}
 
 
 

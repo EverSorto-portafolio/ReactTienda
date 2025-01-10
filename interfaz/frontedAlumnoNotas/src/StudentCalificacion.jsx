@@ -8,6 +8,11 @@ export function StudentCalificacion() {
     const [calificaciones, setCalificaciones] = useState([]);
     const [notas, setNotas] = useState([]);
 
+    let total = 0;
+    calificaciones.map(califi => (
+        total = total + califi.nota * (califi.porcentaje / 100)
+    ));
+
     useEffect(() => {
         API.getNotas(params.matriculaId).then(data => setCalificaciones(data));
     }, []);
@@ -40,6 +45,18 @@ export function StudentCalificacion() {
             });
         }
     }
+
+    function borrarCalificacion(id) {
+       API.deleteNotas(id).then(data => {
+        console.log(id)
+            if (data == "true") {
+                alert("Se elimino la calificacion con exito");
+                setCalificaciones(calificaciones.filter(calificacion => calificacion.id !== id));
+            } else {
+                alert("Error al eliminar la calificacion");
+            }
+        });
+    }
     //#region return
     return (
         <>
@@ -61,8 +78,8 @@ export function StudentCalificacion() {
                                 <td>{calificacion.descripcion}</td>
                                 <td>{calificacion.nota}</td>
                                 <td>{calificacion.porcentaje} %</td>
-                                <td>Eliminar</td>
-                            </tr>
+                                <td onClick={()=> borrarCalificacion(calificacion.id)} >Eliminar</td>
+                            </tr >
                         ))
 
                     }
@@ -82,6 +99,7 @@ export function StudentCalificacion() {
                     </tr>
                 </tbody>
             </table>
+            <p>Nota Final: {total}</p>
         </>
     )
     //#endregion
