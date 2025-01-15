@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import * as API from "./services/data"
 import { Link } from "react-router";
+import { Box, TableContainer, Table,Thead, Tr, Th, Tbody, Td } from "@chakra-ui/react";
 
 export function StudenList() {
    
@@ -39,41 +40,45 @@ export function StudenList() {
 
      return (
         <>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>DNI</th>
-                        <th>Nombre</th>
-                        <th>Direccion</th>
-                        <th>Edad</th>
-                        <th>Email</th>
-                        <th>Asignatura</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
+            <Box m={"50px"}>
+             <TableContainer>
+            <Table size="md" variant="striped" colorScheme="gray">
+                <Thead>
+                    <Tr>
+                        <Th>ID</Th>
+                        <Th>DNI</Th>
+                        <Th>Nombre</Th>
+                        <Th>Direccion</Th>
+                        <Th>Edad</Th>
+                        <Th>Email</Th>
+                        <Th>Asignatura</Th>
+                        <Th></Th>
+                        <Th></Th>
+                        <Th></Th>
+                    </Tr>
+                </Thead>
+                <Tbody>
                     {
                         students?.map(student => (
-                            <tr key={student.id}>
-                             <td>{student.id}</td>
-                             <td>{student.dni}</td>
-                             <td>{student.nombre}</td>   
-                             <td>{student.direccion}</td>
-                             <td>{student.edad}</td>
-                             <td>{student.email}</td>
-                             <td>{student.asignatura}</td>
-                             <td> <Link to={'/student/'+student.id}>Editar</Link>  </td>
-                             <td> <Link to={"/student/calificacion/" + student.matriculaId}>Calificar</Link></td>
-                             <td onClick={()=>deleteStudent(student.id)}>Eliminar</td>
-                            </tr>
+                            <Tr key={student.id}>
+                             <Td>{student.id}</Td>
+                             <Td>{student.dni}</Td>
+                             <Td>{student.nombre}</Td>   
+                             <Td>{student.direccion}</Td>
+                             <Td>{student.edad}</Td>
+                             <Td>{student.email}</Td>
+                             <Td>{student.asignatura}</Td>
+                             <Td> <Link to={'/student/'+student.id}>Editar</Link>  </Td>
+                             <Td> <Link to={"/student/calificacion/" + student.matriculaId}>Calificar</Link></Td>
+                             <Td onClick={()=>deleteStudent(student.id)}>Eliminar</Td>
+                            </Tr>
                             )
                         )
                     }
-                </tbody>
-            </table>
+                </Tbody>
+            </Table>
+            </TableContainer>
+            </Box>
         </>
     )
 }
