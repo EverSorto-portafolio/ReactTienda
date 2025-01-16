@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import * as API from "./services/data";
 import { Header } from "./Headers";
+import { Box, Table, TableContainer, Thead, Tr, Th, Tbody, Td, Input, Button, Badge, Center } from "@chakra-ui/react";
+import { MdCreateNewFolder } from "react-icons/md";
+import { RiDeleteBin2Fill } from "react-icons/ri";
+
+
 export function StudentCalificacion() {
 
     let params = useParams();
@@ -31,10 +36,10 @@ export function StudentCalificacion() {
                 porcentaje: NPorcentaje.value,
                 matriculaId: NmatriculaId
             }
-            
+
             API.crearNotas(nuevaCalificacion).then(data => {
 
-                if (data =="true") {
+                if (data == "true") {
                     alert("Se añadio la calificacion con exito");
                     descripcion: NDescripcion.value = "";
                     nota: NNota.value = "";
@@ -47,8 +52,8 @@ export function StudentCalificacion() {
     }
 
     function borrarCalificacion(id) {
-       API.deleteNotas(id).then(data => {
-        console.log(id)
+        API.deleteNotas(id).then(data => {
+            console.log(id)
             if (data == "true") {
                 alert("Se elimino la calificacion con exito");
                 setCalificaciones(calificaciones.filter(calificacion => calificacion.id !== id));
@@ -61,45 +66,69 @@ export function StudentCalificacion() {
     return (
         <>
             <Header />
-            <table>
-                <thead>
-                    <tr>
-                        <th>Descripcion</th>
-                        <th>Nota</th>
-                        <th>Porcentage</th>
-                        <th> </th>
-                    </tr>
 
-                </thead>
-                <tbody>
-                    {
-                        calificaciones.map(calificacion => (
-                            <tr key = {calificacion.id}>
-                                <td>{calificacion.descripcion}</td>
-                                <td>{calificacion.nota}</td>
-                                <td>{calificacion.porcentaje} %</td>
-                                <td onClick={()=> borrarCalificacion(calificacion.id)} >Eliminar</td>
-                            </tr >
-                        ))
+            <Box>
+                <TableContainer>
+                    <Table size={"md"}>
 
-                    }
-                    <tr>
-                        <td ><input type="text" id="Descripcion" placeholder="Descripcion"
-                            onChange={event => setNotas({ ...notas, descripcion: event.target.value })}
-                        /></td>
-                        <td ><input type="number" id="nota" placeholder="nota"
-                            onChange={event => setNotas({ ...notas, nota: parseInt(event.target.value) })}
-                        /></td>
-                        <td ><input type="text" id="porcentaje" placeholder="porcentaje"
-                            onChange={event => setNotas({ ...notas, porcentaje: event.target.value })}
-                        /></td>
-                        <td><button id="nuevo"
-                            onClick={() => enviarNotas()}
-                        >Crear Calificacion</button></td>
-                    </tr>
-                </tbody>
-            </table>
-            <p>Nota Final: {total}</p>
+                        <Thead>
+                            <Tr>
+                                <Th>Descripcion</Th>
+                                <Th>Nota</Th>
+                                <Th>Porcentage</Th>
+                                <Th> </Th>
+                            </Tr>
+
+                        </Thead>
+                        <Tbody>
+                            {
+                                calificaciones.map(calificacion => (
+                                    <Tr key={calificacion.id}>
+                                        <Td>{calificacion.descripcion}</Td>
+                                        <Td>{calificacion.nota}</Td>
+                                        <Td>{calificacion.porcentaje} %</Td>
+                                        <Td  ><RiDeleteBin2Fill cursor={"pointer"}
+                                            onClick={() => borrarCalificacion(calificacion.id)} /></Td>
+                                    </Tr >
+                                ))
+
+                            }
+                            <Tr>
+                                <Td ><Input type="text" id="Descripcion" placeholder="Descripcion"
+                                    onChange={event => setNotas({ ...notas, descripcion: event.target.value })}
+                                /></Td>
+                                <Td ><Input type="number" id="nota" placeholder="nota"
+                                    onChange={event => setNotas({ ...notas, nota: parseInt(event.target.value) })}
+                                /></Td>
+                                <Td ><Input type="text" id="porcentaje" placeholder="porcentaje"
+                                    onChange={event => setNotas({ ...notas, porcentaje: event.target.value })}
+                                /></Td>
+                                <Td>
+                                    <MdCreateNewFolder cursor={"pointer"} id="nuevo" onClick={() => enviarNotas()} />
+                                </Td>
+                            </Tr>
+                        </Tbody>
+                    </Table>
+
+
+                </TableContainer>
+
+                <Center>
+                <Box ml={"6px"} fontSize={"lg"} >
+                    Nota Total :
+                    <Badge ml="5px" variant={"outline"} colorScheme="green">
+                        {total}
+                    </Badge>
+
+                </Box>
+
+                </Center>
+              
+
+
+
+            </Box>
+
         </>
     )
     //#endregion

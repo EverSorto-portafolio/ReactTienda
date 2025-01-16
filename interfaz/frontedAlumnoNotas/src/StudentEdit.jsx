@@ -68,11 +68,6 @@ export function StudentEdit() {
                             <Box m={"10px"} >
                             <Input  mt={"20px"} type="submit"  id="editar" borderColor="teal" value="editar" />
                             </Box>
-
-                            
-
-                            
-
                         </form>
                     </Box>
 
