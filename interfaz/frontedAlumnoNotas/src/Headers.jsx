@@ -9,7 +9,12 @@ export function Header(){
     const navigate = useNavigate();
     function cerrarSesion(){
         localStorage.removeItem("usuario")
-        alert("cerrando sesion")
+        Swal.fire({
+            title: "Cerrendo Sesion",
+            text: "Cerrado con exito",
+            icon: "success"
+          });
+
         navigate("/")
     }
     return(

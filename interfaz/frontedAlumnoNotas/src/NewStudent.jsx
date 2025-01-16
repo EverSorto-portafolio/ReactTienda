@@ -22,10 +22,18 @@ export function StudentNew(){
             API.createStudent(students).then(result =>{
 
                 if(result == "true"){
-                    alert("insertado")
+                    Swal.fire({
+                        title: "Insertado",
+                        text: "No se detectan problemas",
+                        icon: "success"
+                      });
                     document.getElementById("form-nuevoAlumno").reset()
                 }else{
-                    alert("Error insertar")
+                    Swal.fire({
+                        title: "Error",
+                        text: "Error al ingresar los datos",
+                        icon: "error"
+                      });
                 }
             })
         

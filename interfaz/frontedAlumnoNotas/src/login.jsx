@@ -19,7 +19,7 @@ export function Login() {
         const response = await API.login(teacher.usuario, teacher.pass);
 
         if (response == "Elemeno no encontrado") {
-            alert("Usuario no encontrado");
+            Swal.fire("Ha ocurrido un error");
         }
         if (response.length != 0 && response != "Elemeno no encontrado") {
             sessionStorage.setItem("usuario", response);
