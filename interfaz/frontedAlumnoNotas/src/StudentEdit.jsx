@@ -2,49 +2,83 @@ import { useParams } from "react-router"
 import { Header } from "./Headers";
 import { useEffect, useState } from "react";
 import * as API from "./services/data"
+import { Box, Center, FormControl, FormLabel, Heading, Input } from "@chakra-ui/react";
 
-export function StudentEdit(){
+export function StudentEdit() {
     let params = useParams();
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         API.studentEdit(params.studentId).then(setStudet);
 
-    },[]);
+    }, []);
 
-    function handleSubmit(e){
+    function handleSubmit(e) {
         e.preventDefault();
-        API.getEditStudent(student).then( resut =>{
-            if(resut == "true" ){
+        API.getEditStudent(student).then(resut => {
+            if (resut == "true") {
                 alert("Alumno editado correctamente");
-            }else{
+            } else {
                 alert("Error al editar el alumno");
             }
         });
     }
     const [student, setStudet] = useState([]);
-    return(
+    return (
         <>
-        <Header/>
-        <form id="formulario" onSubmit={handleSubmit}>
+            <Header />
+            <Center>
+                <Box m={"40px"} boxShadow={"xl"} borderRadius={"md"} width={"40%"} id="caja">
+                    <Box textAlign={"center"}>
+                        <Heading > Editar estudiante</Heading>
+                    </Box>
 
-        DNI <input type="text" id="dni" disabled value={student.dni}
-        onChange={event => setStudet({...student, dni:event.target.value})}/><br></br>
+                    <Box p={"20px"}>
+                        <form id="formulario" onSubmit={handleSubmit}>
 
-        Nombre<input type="text" id="nombre" value={student.nombre}
-        onChange={event =>setStudet({...student, nombre:event.target.value})}/><br></br>
-       
-        Direccion<input type="text" id="direccion" value={student.direccion}
-        onChange={event =>setStudet({...student, direccion:event.target.value})}/><br></br>
-        
-        Edad<input type="number" id="edad" value={parseInt(student.edad)}
-        onChange={event =>setStudet({...student, edad:parseInt(event.target.value)})}/><br></br>
-        
-        Email<input type="text" id="email" value={student.email}
-        onChange={event =>setStudet({...student, email:event.target.value})}/><br></br>
-        
-        <input type="submit" id="editar" value="editar"/>
-       
-        </form>
+                            <FormControl mt={"3px"} >
+                                <FormLabel> DNI</FormLabel>
+                                <Input input type="text" id="dni" disabled value={student.dni}
+                                    onChange={event => setStudet({ ...student, dni: event.target.value })} />
+                            </FormControl>
+
+                            <FormControl mt={"3px"} >
+                                <FormLabel> Nombre</FormLabel>
+                                <Input type="text" id="nombre" value={student.nombre}
+                                    onChange={event => setStudet({ ...student, nombre: event.target.value })} />
+                            </FormControl>
+
+                            <FormControl mt={"3px"} >
+                                <FormLabel>  Direccion</FormLabel>
+                                <Input type="text" id="direccion" value={student.direccion}
+                                    onChange={event => setStudet({ ...student, direccion: event.target.value })} />
+                            </FormControl>
+
+                            <FormControl mt={"3px"} >
+                                <FormLabel>  Edad</FormLabel>
+                                <Input type="number" id="edad" value={parseInt(student.edad)}
+                                onChange={event => setStudet({ ...student, edad: parseInt(event.target.value) })} />
+                            </FormControl>
+
+                            <FormControl mt={"3px"} >
+                                <FormLabel> Edad </FormLabel>
+                                <Input type="text" id="email" value={student.email}
+                                onChange={event => setStudet({ ...student, email: event.target.value })} />
+                            </FormControl>
+                            
+                            <Box m={"10px"} >
+                            <Input  mt={"20px"} type="submit"  id="editar" borderColor="teal" value="editar" />
+                            </Box>
+
+                            
+
+                            
+
+                        </form>
+                    </Box>
+
+                </Box>
+            </Center>
+
         </>
     )
 }
