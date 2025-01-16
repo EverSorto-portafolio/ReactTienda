@@ -71,7 +71,7 @@ export function StudenList() {
                                         <Td>{student.edad}</Td>
                                         <Td>{student.email}</Td>
                                         <Td>{student.asignatura}</Td>
-                                        <Td> <Link ><AiFillFormatPainter to={'/student/' + student.id} /></Link> </Td>
+                                        <Td> <Link to={'/student/' + student.id} >     <AiFillFormatPainter  />   </Link> </Td>
                                         <Td> <Link to={"/student/calificacion/" + student.matriculaId}><AiFillTrophy /></Link></Td>
                                         <Td cursor={"pointer"}><AiOutlineDelete onClick={() => deleteStudent(student.id)} /></Td>
                                     </Tr>
